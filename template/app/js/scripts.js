@@ -8,10 +8,11 @@ $(document).ready(function () {
 
   /* custom keyboard layouts */
   var normalLayout = [
-    '1 2 3 4 5 6 7 8 9 0 -',
+    ' 1 2 3 4 5 6 7 8 9 0 -',
     '@ q w e r t y u i o p',
-    'a s d f g h j k l {bksp}',
-    '~ z x c v b n m . \' {accept}',
+    ' a s d f g h j k l {bksp}',
+    '~ z x c v b n m . \'',
+    '{accept} {cancel}',
   ];
 
   // var shiftLayout = [
@@ -61,7 +62,7 @@ $(document).ready(function () {
           // 'alt-shift': altShitlayout,
         },
         visible: function (e, keyboard) {
-          keyboard.$keyboard.find('.ui-keyboard-accept').text('Enter')
+          keyboard.$keyboard.find('.ui-keyboard-accept').text('Done')
         },
         autoAccept: true,
         appendTo: $('.keyboard'),
@@ -85,16 +86,53 @@ $(document).ready(function () {
           // 'alt-shift': altShitlayout,
         },
         visible: function (e, keyboard) {
-          keyboard.$keyboard.find('.ui-keyboard-accept').text('Enter')
+          keyboard.$keyboard.find('.ui-keyboard-accept').text('Done')
+          keyboard.$keyboard.find('.ui-keyboard-bksp').text('Del');
+
+          $('.promocode-page').addClass('keyboard-email-active');
+        },
+        hidden: function (e, keyboard, el) {
+          $('.promocode-page').removeClass('keyboard-email-active');
         },
         autoAccept: true,
-        appendTo: $('.keyboard'),
+        appendTo: $('.keyboard-email'),
+      });
+    }
+
+    if ($('#promo').length > 0) {
+      $('#promo').keyboard({
+        layout: 'custom',
+        position: {
+          of: null,
+          my: 'center top',
+          // at: 'center top',
+          at2: 'center bottom'
+        },
+        usePreview: false,
+        customLayout: {
+          normal: normalLayout,
+          // shift: shiftLayout,
+          // alt: altLayout,
+          // 'alt-shift': altShitlayout,
+        },
+        visible: function (e, keyboard) {
+          keyboard.$keyboard.find('.ui-keyboard-accept').text('Done');
+          keyboard.$keyboard.find('.ui-keyboard-bksp').text('Del');
+
+          $('.promocode-page').addClass('keyboard-promo-active');
+        },
+        hidden: function (e, keyboard, el) {
+          $('.promocode-page').removeClass('keyboard-promo-active');
+        },
+        autoAccept: true,
+        appendTo: $('.keyboard-promo'),
       });
     }
   }
 
   //validate email
   var email = $('#email');
+  var promo = $('#promo');
 
   function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,6})+$/;
@@ -103,13 +141,15 @@ $(document).ready(function () {
 
 
   // validate Terms agreement
-  var terms = $('#terms');
-  var news = $('#news');
-  var termsSubmitLabel = $('#termsSubmitLabel');
-  var termsSubmit = $('#termsSubmit');
+  var termsSubmitLabel = $('#formSubmitLabel');
+  var termsSubmit = $('#formSubmit');
+  var policyBtn = $('.policy-btn');
 
-  var email_terms_validation = function () {
-    if ($(terms).is(':checked') && (isEmail(email.val()) || email.val() === '')) {
+  var form_validation = function () {
+    // promo validation
+
+    // email validaton
+    if (isEmail(email.val()) && !email.hasClass('required') && promo.val().length > 0) {
       termsSubmit.removeAttr('disabled');
       termsSubmitLabel.removeClass('disabled');
     } else {
@@ -118,11 +158,16 @@ $(document).ready(function () {
     }
   };
 
-  terms.click(email_terms_validation);
-  news.click(email_terms_validation);
-
   email.change(function () {
-    email_terms_validation()
+    form_validation()
+  });
+
+  promo.change(function () {
+    form_validation()
+  });
+
+  policyBtn.on('click', function () {
+    policyModal.addClass('show');
   });
 
   /* setup modal */
@@ -158,6 +203,103 @@ $(document).ready(function () {
       $('.modal-wrap').removeClass('show');
     }
   })
-
   /* end modal */
+
+  // get poll_session
+  var req = new XMLHttpRequest();
+  req.open('GET', document.location, false);
+  req.send(null);
+  var headers = req.getAllResponseHeaders().toLowerCase();
+  var headersArr = headers.trim().split('\n');
+
+  function getPollSession(arr) {
+    var poll_session;
+
+    arr.forEach(function (item) {
+      var ItemKey = item.split(':')[0];
+      var itemValue = item.split(':')[1];
+
+      if (ItemKey === 'poll-session') {
+        poll_session = itemValue;
+      }
+    })
+    return poll_session;
+  }
+
+  var poll_session = getPollSession(headersArr) !== undefined ? getPollSession(headersArr).trim() : false;
+
+  // get timezone offset
+  var date = new Date();
+  const currentTimeZoneOffsetInHours_func = () => {
+    let offset = date.getTimezoneOffset() / 60;
+    if (Math.sign(offset) === -1) {
+      return Math.abs(offset);
+    }
+    if (Math.sign(offset) === 1) {
+      return -Math.abs(offset);
+    }
+    if (Math.sign(offset) === 0 && Math.sign(offset) === -0) {
+      return Math.abs(offset);
+    }
+  };
+
+  const currentTimeZoneOffsetInHours = currentTimeZoneOffsetInHours_func();
+  console.log(currentTimeZoneOffsetInHours)
+
+  // send timezone offset to server
+  var setTimezoneReques_sent = sessionStorage.getItem('setTimezoneReques_sent');
+  //del prev setTimezoneReques_sent mark
+  if (window.location.pathname.includes('/index.html') && setTimezoneReques_sent === 'true') {
+    sessionStorage.setItem('setTimezoneReques_sent', 'false');
+  }
+
+  if (setTimezoneReques_sent !== 'true' && poll_session) {
+    var base_url = window.location.origin;
+    var setTimezoneRequest_Url = `${base_url}/bo/poll-sessions/${poll_session}/set-tz-offset/${currentTimeZoneOffsetInHours}/`;
+    $.ajax({
+      url: setTimezoneRequest_Url,
+      type: "GET",
+      success: function (data) {
+        console.log(data);
+        // set setTimezoneReques_sent to true
+        sessionStorage.setItem('setTimezoneReques_sent', 'true');
+      },
+      error: function (error_data) {
+        console.log(error_data);
+      }
+    });
+  }
+
+  // move to step 2 when user scans the QT-code
+  if (window.location.pathname.includes('/index.html')) {
+    if (odoreConfig) {
+      const { deviceId, pollSessionId, isLastStep, location } = odoreConfig;
+
+      let url_device_check = `${window.location.protocol}//${window.location.host}/mobile/devices/${deviceId}/${pollSessionId}/qr`
+
+      $.ajax({
+        url: url_device_check,
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+        },
+        error: function (error_data) {
+          console.log(error_data);
+        }
+      });
+    }
+  }
+
+  // function disableControls(params) {
+  //   const elements = document.querySelectorAll('button, input');
+  //   const links = document.querySelectorAll('a');
+
+  //   Array.from(elements).forEach(element => {
+  //     element.disabled = true;
+  //   })
+  //   Array.from(links).forEach(link => {
+  //     link.addEventListener('click', (e) => { e.preventDefault(); })
+  //   })
+  // }
+
 });
