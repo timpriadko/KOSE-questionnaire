@@ -1,7 +1,7 @@
 question,answer,CAP_TOTALE
-What is your perfect first date?,"{{EN: Brunchat 10am||JP: 10時からブランチ||CH: 10点钟的早午餐}}",10
-What is your perfect first date?,"{{EN: Coffee at 4pm||JP: 16時からお茶||CH: 4点钟的下午茶}}",10
-What is your perfect first date?,"{{EN: Dinner at 8pm||JP: 20時からディナー||CH: 8点钟的晚餐}}",10
+What is your perfect first date?,"Brunchat 10am",10
+What is your perfect first date?,"Coffee at 4pm",10
+What is your perfect first date?,"Dinner at 8pm",10
 What is your age group?,"~  18",10
 What is your age group?,"18 ~ 24",10
 What is your age group?,"25 ~ 29",10
@@ -9,12 +9,12 @@ What is your age group?,"30 ~ 39",10
 What is your age group?,"40 ~ 49",10
 What is your age group?,"50 ~ 59",10
 What is your age group?,"60 ~",10
-What is your favorite drink?,"{{EN: Tea||JP: 紅茶||CH: 红茶}}",10
-What is your favorite drink?,"{{EN: Coffee||JP: コーヒー||CH: 咖啡}}",10
-What is your favorite drink?,"{{EN: Wine||JP: ワイン||CH: 红酒}}",10
-How often should you text your partner?,"{{EN: Everyday||JP: 毎日||CH: 每天}}",10
-How often should you text your partner?,"{{EN: Every other day||JP: 2日に1回||CH: 两天联系一次}}",10
-How often should you text your partner?,"{{EN: When I feel like it||JP: 気が向いたとき||CH: 想要联系的时候}}",10
+What is your favorite drink?,"Tea",10
+What is your favorite drink?,"Coffee",10
+What is your favorite drink?,"Wine",10
+How often should you text your partner?,"Everyday",10
+How often should you text your partner?,"Every other day",10
+How often should you text your partner?,"When I feel like it",10
 product,"JILL STUART",10
 product,"ADDICTION",10
 product,"Flora Notis",10

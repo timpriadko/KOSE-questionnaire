@@ -16,7 +16,7 @@
     <div class="background"></div>
 
     <div class="logo">
-      <img src="img/logo.png" alt="" />
+      <img src="img/logo-kose.png" alt="" />
     </div>
 
     <div class="grid-position">
@@ -24,11 +24,15 @@
 
         <form action="last.html" method="get">
 
-          <h3>
+          <h3 class="hide-desktop ">
+            {{EN: Please open the camera on your line app and scan the QR code||JP: ラインアプリでカメラを開き、QRコードをスキャンしてください||CH: 请在您的在线应用程序中打开相机并扫描QR码}}
+          </h3>
+
+          <h3 class="hide-mobile">
             {{EN: Let’s become friends with Maison KOSÉ official LINE account to get your sample!||JP: メールアドレス登録とメゾンコーセー公式LINEアカウントを友だち追加でサンプル プレゼント！||CH: 登录电子邮箱地址或添加Maison KOSÉ的LINE公众账号为好友，即可获得精美小样。}}
           </h3>
 
-          <div class="qr-block">
+          <div class="qr-block hide-mobile">
             <h5>
               {{EN: Please scan the QR code below.||JP: 友だち追加は下記QRコードから||CH: 请扫描一下二维码，添加好友。}}
 
@@ -38,7 +42,7 @@
             </div>
           </div>
 
-          <div class="steps">
+          <div class="steps hide-mobile">
             <div class="step">
               {{EN: <span class="fs-27"><span class="num">Step1.</span> After adding friends, please type <span class="promo">「GNZ2012」</span> and send.</span>||JP: <span class="fs-24"><span class="num">Step1.</span> 友だち追加後、トーク画面で 「GNZ2012」 と入力・送信してください</span>||CH: <span class="fs-25"><span class="num">第一步：</span> 添加好友后，请在对话框内输入并发送编码「GNZ2012」</span>}}
             </div>
@@ -52,58 +56,55 @@
               {{EN: <span class="fs-27"><span class="num">Step4.</span> Click <span class="promo">「GET MY SAMPLE」</span> to receive your sample!</span>||JP: <span class="fs-24"><span class="num">Step4.</span> ページ下部の【GET MY SAMPLE】をクリックし、サンプルをお受け取りください</span>||CH: <span class="fs-25"><span class="num">第四歩：</span> 请点击下方的「获取我的小样」按钮，领取小样。</span>}}
             </div>
           </div>
-      </div>
 
-      <div class="keyboard keyboard-promo">
-        <h5>
-          {{EN: Please type in the autoreply promo code below.||JP: 自動返信で届くプロモーションコードを入力してください||CH: Please type in the autoreply promo code below.}}
-        </h5>
-        <input type="text" id="promo" name="promo" class="promo-input" autocomplete="off"
-          placeholder="{{EN: PRMO CODE}}" />
-        <h5>
-          {{EN: *Type [GNZ2012] and send to recieve the promo code||JP: ※トーク画面で 「GNZ2012」 と入力・送信し、プロモーションコードを取得してください||CH: Please type in the autoreply promo code below.}}
-        </h5>
-      </div>
-
-      <div class="keyboard keyboard-email">
-        <h3>
-          {{EN: Please enter your email||JP: メールアドレスを入力してください。||CH: Please enter your email}}
-        </h3>
-        <input type="email" id="email" name="email" class="email-input" placeholder="{{EN: email}}" />
-      </div>
-
-      <div class="checkboxes">
-        <div class="wrap-checkbox wrap-checkbox__left-check">
-          <p class="big">
-            Please confirm that you agree to our
-            <span class="terms policy-btn">Terms of Use</span>
-            and our
-            <span class="terms policy-btn">Privacy Policy</span>
-            by ticking here
-          </p>
-
-          <div class="wrap-checkbox">
-            <input type="checkbox" name="checkbox" class="checkbox" id="terms" />
-            <label for="terms"></label>
+          <div class="keyboard keyboard-promo hide-mobile">
+            <h5>
+              {{EN: Please type in the autoreply promo code below.||JP: 自動返信で届くプロモーションコードを入力してください||CH: Please type in the autoreply promo code below.}}
+            </h5>
+            <input type="text" id="promo" name="promo" class="promo-input" autocomplete="off"
+              placeholder="{{EN: PROMO CODE}}" />
+            <h5>
+              {{EN: *Type [GNZ2012] and send to recieve the promo code||JP: ※トーク画面で 「GNZ2012」 と入力・送信し、プロモーションコードを取得してください||CH: Please type in the autoreply promo code below.}}
+            </h5>
           </div>
-        </div>
-      </div>
-
-      <!-- <div class="wrap-info hide-desktop">
-
+    
+          <div class="keyboard keyboard-email hide-mobile">
+            <h3>
+              {{EN: Please enter your email||JP: メールアドレスを入力してください。||CH: Please enter your email}}
+            </h3>
+            <input type="email" id="email" name="email" class="email-input" placeholder="{{EN: email}}" />
           </div>
-
-          <div class="wrap-info hide-mobile">
-
+    
+          <!-- <div class="checkboxes hide-mobile">
+            <div class="wrap-checkbox wrap-checkbox__left-check">
+              <p class="big">
+                I agree with the 
+                <span class="terms terms-btn">Terms of Use</span>
+              </p>
+    
+              <div class="wrap-checkbox">
+                <input type="checkbox" name="checkbox" class="checkbox" id="terms" />
+                <label for="terms"></label>
+              </div>
+            </div>
           </div> -->
-
-      <div class="btns">
-        <label class="btn disabled" id="formSubmitLabel">
-          <input type="submit" id="formSubmit" disabled />
-          {{EN: GET MY SAMPLE}}
-        </label>
+    
+          <!-- <div class="wrap-info hide-desktop">
+    
+              </div>
+    
+              <div class="wrap-info hide-mobile">
+    
+              </div> -->
+    
+          <div class="btns hide-mobile">
+            <label class="btn disabled" id="formSubmitLabel">
+              <input type="submit" id="formSubmit" disabled />
+              {{EN: GET MY SAMPLE}}
+            </label>
+          </div>
+        </form>
       </div>
-      </form>
     </div>
 
     <div class="grid-position--bottom">
@@ -111,9 +112,9 @@
     </div>
 
 
-    <div class="modal-wrap" id="modal-policy">
+    <div class="modal-wrap" id="modal-terms">
       <div class="modal">
-        <div class="modal__header">Privacy policy</div>
+        <div class="modal__header">Terms of Use</div>
 
         <div class="modal__body">
           <p class="modal__text">

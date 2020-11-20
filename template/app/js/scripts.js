@@ -205,101 +205,93 @@ $(document).ready(function () {
   })
   /* end modal */
 
-  // get poll_session
-  var req = new XMLHttpRequest();
-  req.open('GET', document.location, false);
-  req.send(null);
-  var headers = req.getAllResponseHeaders().toLowerCase();
-  var headersArr = headers.trim().split('\n');
+  // move to step 2 when user scans the QT-code
+  if (window.location.pathname.includes('/index.html')) {
 
-  function getPollSession(arr) {
-    var poll_session;
+    if (odoreConfig) {
+      const {
+        isMobile,
+      } = odoreConfig;
 
-    arr.forEach(function (item) {
-      var ItemKey = item.split(':')[0];
-      var itemValue = item.split(':')[1];
-
-      if (ItemKey === 'poll-session') {
-        poll_session = itemValue;
+      if (isMobile === true) {
+        location.href = "step_1.html";
       }
-    })
-    return poll_session;
+    }
   }
 
-  var poll_session = getPollSession(headersArr) !== undefined ? getPollSession(headersArr).trim() : false;
+  // promocode step
+  function enableControls() {
+    const elements = document.querySelectorAll('button, input');
+    const links = document.querySelectorAll('a');
 
-  // get timezone offset
-  var date = new Date();
-  const currentTimeZoneOffsetInHours_func = () => {
-    let offset = date.getTimezoneOffset() / 60;
-    if (Math.sign(offset) === -1) {
-      return Math.abs(offset);
-    }
-    if (Math.sign(offset) === 1) {
-      return -Math.abs(offset);
-    }
-    if (Math.sign(offset) === 0 && Math.sign(offset) === -0) {
-      return Math.abs(offset);
+    Array.from(elements).forEach(element => {
+      element.disabled = false;
+    })
+    Array.from(links).forEach(link => {
+      link.addEventListener('click', (e) => {return false })
+    })
+  }
+
+  if (window.location.pathname.includes('/step_7.html')) {
+    if (odoreConfig) {
+      const {
+        deviceId,
+        pollSessionId,
+      } = odoreConfig;
+
+      fetch(
+        `${window.location.protocol}//${window.location.host}/mobile/devices/${deviceId}/${pollSessionId}/qr`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            to: 'mobile',
+            event: {
+              type: 'session_over',
+            }
+          }),
+        }
+      );
+      enableControls();
     }
   };
 
-  const currentTimeZoneOffsetInHours = currentTimeZoneOffsetInHours_func();
-  console.log(currentTimeZoneOffsetInHours)
+  
+  // product page functionality
+  var answer_inputs = $('input[data-answer="answer"]');
+  var question = $('input[data-question="question"]').closest('form').find('input[name="question"]').val();
+  var last_question =  $('input[data-last="last_question"]');
+  var q_1_a = 'Brunchat 10am';
+  var q_1_b = 'Coffee at 4pm';
+  var q_1_c = 'Dinner at 8pm';
 
-  // send timezone offset to server
-  var setTimezoneReques_sent = sessionStorage.getItem('setTimezoneReques_sent');
-  //del prev setTimezoneReques_sent mark
-  if (window.location.pathname.includes('/index.html') && setTimezoneReques_sent === 'true') {
-    sessionStorage.setItem('setTimezoneReques_sent', 'false');
-  }
+  function answerInputHandler(e) {
+    e.preventDefault();
 
-  if (setTimezoneReques_sent !== 'true' && poll_session) {
-    var base_url = window.location.origin;
-    var setTimezoneRequest_Url = `${base_url}/bo/poll-sessions/${poll_session}/set-tz-offset/${currentTimeZoneOffsetInHours}/`;
-    $.ajax({
-      url: setTimezoneRequest_Url,
-      type: "GET",
-      success: function (data) {
-        console.log(data);
-        // set setTimezoneReques_sent to true
-        sessionStorage.setItem('setTimezoneReques_sent', 'true');
-      },
-      error: function (error_data) {
-        console.log(error_data);
+    sessionStorage.setItem(question, this.value);
+
+    if (last_question.length > 0) {
+      var answer_1 = sessionStorage.getItem('What is your perfect first date?');
+      console.log(answer_1);
+
+      if (answer_1 === q_1_a) {
+        window.open("step_6-product_1.html",'_self');
       }
-    });
-  }
-
-  // move to step 2 when user scans the QT-code
-  if (window.location.pathname.includes('/index.html')) {
-    if (odoreConfig) {
-      const { deviceId, pollSessionId, isLastStep, location } = odoreConfig;
-
-      let url_device_check = `${window.location.protocol}//${window.location.host}/mobile/devices/${deviceId}/${pollSessionId}/qr`
-
-      $.ajax({
-        url: url_device_check,
-        type: "GET",
-        success: function (data) {
-          console.log(data);
-        },
-        error: function (error_data) {
-          console.log(error_data);
-        }
-      });
+      if (answer_1 === q_1_b) {
+        window.open("step_6-product_3.html",'_self');
+      }
+      if (answer_1 === q_1_c) {
+        window.open("step_6-product_2.html",'_self');
+      }
+    } else {
+      $(this).closest('form').submit();
     }
   }
 
-  // function disableControls(params) {
-  //   const elements = document.querySelectorAll('button, input');
-  //   const links = document.querySelectorAll('a');
-
-  //   Array.from(elements).forEach(element => {
-  //     element.disabled = true;
-  //   })
-  //   Array.from(links).forEach(link => {
-  //     link.addEventListener('click', (e) => { e.preventDefault(); })
-  //   })
-  // }
+  if (answer_inputs.length > 0) {
+    answer_inputs.click(answerInputHandler);
+  }
 
 });

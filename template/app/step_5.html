@@ -14,14 +14,14 @@
     <div class="background"></div>
 
     <div class="logo">
-      <img src="img/logo.png" alt="" />
+      <img src="img/logo-kose.png" alt="" />
     </div>
 
     <div class="grid-position">
       <div class="grid-position--top">
 
         <form action="step_6-product_1.html" method="get" class="question">
-          <input type="hidden" name="question" value="How often should you text your partner?" />
+          <input type="hidden" data-last="last_question" name="question" value="How often should you text your partner?" />
 
           <h3>
             {{EN: How often should you text your partner?||JP:好きな人と連絡を取りたい頻度は？||CH: 您和喜欢的人多久联系一次？}}
@@ -30,7 +30,7 @@
           <div class="btns">
 
             <label class="btn btn__card">
-              <input type="submit" name="answer" value="{{EN: Everyday||JP: 毎日||CH: 每天}}" hidden />
+              <input type="submit" data-answer="answer" name="answer" value="Everyday" hidden />
 
               <img src="./img/3-1.jpg" alt="">
               <p>
@@ -39,7 +39,7 @@
             </label>
 
             <label class="btn btn__card">
-              <input type="submit" name="answer" value="{{EN: Every other day||JP: 2日に1回||CH: 两天联系一次}}" hidden />
+              <input type="submit" data-answer="answer" name="answer" value="Every other day" hidden />
 
               <img src="./img/3-2.jpg" alt="">
               <p>
@@ -48,7 +48,7 @@
             </label>
 
             <label class="btn btn__card">
-              <input type="submit" name="answer" value="{{EN: When I feel like it||JP: 気が向いたとき||CH: 想要联系的时候}}" hidden />
+              <input type="submit" data-answer="answer" name="answer" value="When I feel like it" hidden />
 
               <img src="./img/3-3.jpg" alt="">
               <p>
