@@ -209,7 +209,6 @@ h5 {
     h3 {
       font-size: 42px;
       margin-top: 48px;
-      letter-spacing: -3px;
     }
 
     img {
@@ -227,7 +226,6 @@ h5 {
       padding: 42px 44px 25px;
       font-size: 30px;
       line-height: 39px;
-      letter-spacing: -1px;  
     }
   }
 
@@ -238,7 +236,6 @@ h5 {
     .btn {      
       min-height: 127px;
       font-size: 30px;
-      letter-spacing: -1px;
     }
   }
 
@@ -460,19 +457,18 @@ input {
 
 .steps {
   max-width: 789px;
-  margin: 39px auto 50px;
+  margin: 25px auto 35px;
 
   .step {
     font-size: 27px;
     font-weight: 500;
-    letter-spacing: -1px;
 
     .num {
       font-weight: bold;
     }
 
     &+.step {
-      margin-top: 13px;
+      margin-top: 7px;
     }
   }
 }
@@ -584,7 +580,7 @@ input {
   display: flex;
   flex-direction: column;
   max-width: 789px;
-  margin: 29px auto 0;
+  margin: 29px auto 29px;
 
   & > .wrap-checkbox {
     display: flex;
@@ -642,6 +638,14 @@ input {
       }
     }
   }
+
+  & > p {
+    font-size: 20px;
+
+    & + .wrap-checkbox {
+      margin-top: 10px;
+    }
+  }
 }
 
 p.big {
@@ -677,8 +681,61 @@ p.big {
   justify-content: space-between;
   height: 100%;
 }
+
 .text-center {
   text-align: center;
+}
+
+h3.analysis-text {
+  max-width: 70%;
+  margin: 141px auto 0;
+  font-size: 39px;
+  line-height: 55px;
+}
+
+.analysis-bar-block {
+  margin-top: 9vw;
+  max-width: 78%;
+  margin: 9vw auto 0;
+  font-size: 39px;
+  line-height: 55px;
+  min-height: 5.2vw;
+  position: relative;
+  border: 7px solid #4D4E4C;
+
+  p {
+    position: absolute;
+    left: 1.7vw;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.front {
+      z-index: 5;
+      color: #fff;
+      word-break: keep-all;
+    }
+
+    &.back {
+      color: #4D4E4C;
+      z-index: 3;
+    }
+
+    & + p {
+      margin-top: 0;
+    }
+  }
+ 
+  .analysis-bar {
+    position: absolute;
+    height: 105%;
+    width: 0%;
+    top: -1px;
+    left: 0;
+    z-index: 4;
+    background-color: #4D4E4C;
+    overflow: hidden;
+    transition: width 2s;
+  }
 }
 
 @media screen and (max-width: 560px) {
@@ -738,8 +795,8 @@ p.big {
     .logo {
       padding-top: 30px;
       img {
-        max-width: 190px;
-        height: 114px;
+        max-width: 160px;
+        height: auto;
       }
     }
 
@@ -797,6 +854,13 @@ p.big {
   .question {
     h3 {
       margin-top: 30px;
+
+      &.analysis-text {
+        font-size: 20px;
+        line-height: 130%;
+        max-width: 84%;
+        margin-top: 30px;
+      }
     }
 
     .btns {
@@ -817,7 +881,23 @@ p.big {
           }
         }
       }
+
+      &__md {
+        margin-top: 20px;
+        .btn__md {
+          margin-bottom: 14px;
+          line-height: 130%;
+          min-height: 60px;
+        }
+      }
     }
+  }
+
+  .analysis-bar-block {
+    max-width: 84%;
+    min-height: 12vw;
+    font-size: 23px;
+    line-height: 130%;
   }
 
   .product {
@@ -826,24 +906,24 @@ p.big {
     }
 
     &__block {
-      margin-top: 43px;
+      margin-top: 20px;
       border: 14px solid #f3f3f3;
 
       h3 {
-        font-size: 30px;
+        font-size: 20px;
+        margin-top: 10px;
         letter-spacing: 0px;
-        margin-top: 15px;
       }
 
       img {
-        max-width: 165px;
+        max-width: 120px;
         margin-top: 14px;
       }
 
       p {
         padding: 15px 0 15px;
-        font-size: 20px;
-        line-height: 130%;
+        font-size: 16px !important;
+        line-height: 130% !important;
       }
     }
 
