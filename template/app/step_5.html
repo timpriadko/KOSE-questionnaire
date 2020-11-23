@@ -21,13 +21,32 @@
       <div class="grid-position--top">
 
         <form action="step_6-product_1.html" method="get" class="question">
-          <input type="hidden" data-last="last_question" name="question" value="How often should you text your partner?" />
+          <input type="hidden" data-last="last_question" name="question"
+            value="How often should you text your partner?" />
 
-          <h3>
+          <h3 class="to-hide">
             {{EN: How often should you text your partner?||JP:好きな人と連絡を取りたい頻度は？||CH: 您和喜欢的人多久联系一次？}}
           </h3>
 
-          <div class="btns">
+          <h3 class="hide to-show analysis-text">
+            {{EN: Thank you for participating! <br> We are now analyzing your result to find your perfect match with our
+            selected fragrances.||JP:ご参加ありがとうございます！ <br>あなたにぴったりの香りをお選びしています。||CH: "谢谢您的参与。 <br> 我们将为您选择与您最匹配的香型。 }}
+          </h3>
+
+          <div class="analysis-bar-block hide to-show">
+            <p class="back">
+              {{EN:<span class="font-josefin">Analysing</span>||JP:診断中||CH: 诊断中"}}
+            </p>
+            <div class="analysis-bar-wrap">
+              <div class="analysis-bar">
+                <p class="front">
+                  {{EN:<span class="font-josefin">Analysing</span>||JP:診断中||CH: 诊断中"}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="btns to-hide">
 
             <label class="btn btn__card">
               <input type="submit" data-answer="answer" name="answer" value="Everyday" hidden />

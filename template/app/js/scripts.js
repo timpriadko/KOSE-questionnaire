@@ -131,8 +131,6 @@ $(document).ready(function () {
   }
 
   //validate email
-  var email = $('#email');
-  var promo = $('#promo');
 
   function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,6})+$/;
@@ -141,15 +139,23 @@ $(document).ready(function () {
 
 
   // validate Terms agreement
+  var email = $('#email');
+  var promo = $('#promo');
   var termsSubmitLabel = $('#formSubmitLabel');
   var termsSubmit = $('#formSubmit');
-  var policyBtn = $('.policy-btn');
+  var termsBtn = $('.terms-btn');
+  var terms = $('#terms');
 
   var form_validation = function () {
     // promo validation
+    const promocode = 'GNZ2012';
 
     // email validaton
-    if (isEmail(email.val()) && !email.hasClass('required') && promo.val().length > 0) {
+    if (isEmail(email.val()) &&
+      !email.hasClass('required') &&
+      promo.val().length > 0 &&
+      promo.val().toUpperCase() === promocode &&
+      $(terms).is(':checked')) {
       termsSubmit.removeAttr('disabled');
       termsSubmitLabel.removeClass('disabled');
     } else {
@@ -166,7 +172,11 @@ $(document).ready(function () {
     form_validation()
   });
 
-  policyBtn.on('click', function () {
+  terms.change(function () {
+    form_validation()
+  });
+
+  termsBtn.on('click', function () {
     policyModal.addClass('show');
   });
 
@@ -228,7 +238,7 @@ $(document).ready(function () {
       element.disabled = false;
     })
     Array.from(links).forEach(link => {
-      link.addEventListener('click', (e) => {return false })
+      link.addEventListener('click', (e) => { return false })
     })
   }
 
@@ -253,19 +263,35 @@ $(document).ready(function () {
             }
           }),
         }
-      );
+      )
+
+      // enable controls
       enableControls();
+
+      // // hide "Your session is expired" msg
+      // if ($('#Capa_1').length > 0) {
+      //   $('#Capa_1').parent().parent().parent().hide()
+      // }
     }
   };
 
-  
+
   // product page functionality
   var answer_inputs = $('input[data-answer="answer"]');
   var question = $('input[data-question="question"]').closest('form').find('input[name="question"]').val();
-  var last_question =  $('input[data-last="last_question"]');
+  var last_question = $('input[data-last="last_question"]');
   var q_1_a = 'Brunchat 10am';
   var q_1_b = 'Coffee at 4pm';
   var q_1_c = 'Dinner at 8pm';
+
+  function hideBloks() {
+    $('.to-hide').addClass('hide');
+  }
+
+  function displayBlocks() {
+    $('.to-show').removeClass('hide');
+  }
+
 
   function answerInputHandler(e) {
     e.preventDefault();
@@ -276,15 +302,24 @@ $(document).ready(function () {
       var answer_1 = sessionStorage.getItem('What is your perfect first date?');
       console.log(answer_1);
 
-      if (answer_1 === q_1_a) {
-        window.open("step_6-product_1.html",'_self');
-      }
-      if (answer_1 === q_1_b) {
-        window.open("step_6-product_3.html",'_self');
-      }
-      if (answer_1 === q_1_c) {
-        window.open("step_6-product_2.html",'_self');
-      }
+      // load animation
+      hideBloks();
+      displayBlocks();
+      setTimeout(function () {
+        $('.analysis-bar').addClass('w-100');
+      }, 200)
+
+      setTimeout(function () {
+        if (answer_1 === q_1_a) {
+          window.open("step_6-product_1.html", '_self');
+        }
+        if (answer_1 === q_1_b) {
+          window.open("step_6-product_3.html", '_self');
+        }
+        if (answer_1 === q_1_c) {
+          window.open("step_6-product_2.html", '_self');
+        }
+      }, 2200)
     } else {
       $(this).closest('form').submit();
     }
