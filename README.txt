@@ -10,8 +10,9 @@ https://odore.ml/#/devices/37457270-8ef8-4fac-a6ad-bdb2b43a796c - рубутну
 
 https://odore.ml/#/campaigns/241779d0-7c97-416d-a985-0d8aeb91df7f - Odessa
 https://box.odore.ml/devices/3fb6c8ab-60e1-4195-baf3-af6c1e5e2ce8/index.html - Odessa device
-<<<<<<< HEAD
 - нажать - Edit campaign
-=======
-- нажать - Edit campaign
->>>>>>> 9d9e79e380651d1f07bd67e1f394fc9608bd0c4f
+
+
+Kose test campaign
+https://odore.ml/#/campaigns/6673222e-857b-45e3-8e70-835833eb2b35 - кампания
+https://box.odore.ml/devices/b95ca35a-8d47-47a7-81ee-3fd66f551ca7/index.html - ссылка на девайс

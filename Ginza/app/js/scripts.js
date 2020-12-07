@@ -249,6 +249,7 @@ $(document).ready(function () {
         pollSessionId,
       } = odoreConfig;
 
+      // close session
       fetch(
         `${window.location.protocol}//${window.location.host}/mobile/devices/${deviceId}/${pollSessionId}/qr`,
         {
@@ -264,23 +265,20 @@ $(document).ready(function () {
           }),
         }
       )
-
-      // enable controls
-      enableControls();
-
-      // // hide "Your session is expired" msg
-      // if ($('#Capa_1').length > 0) {
-      //   $('#Capa_1').parent().parent().parent().hide()
-      // }
     }
+
+    // enable controls
+    setTimeout(function () {
+      enableControls();
+    }, 500)
   };
 
 
   // product page functionality
-  var answer_inputs = $('input[data-answer="answer"]');
+  var answer_inputs = $('input[name="answer"]');
   var question = $('input[data-question="question"]').closest('form').find('input[name="question"]').val();
   var last_question = $('input[data-last="last_question"]');
-  var q_1_a = 'Brunchat 10am';
+  var q_1_a = 'Brunch at 10am';
   var q_1_b = 'Coffee at 4pm';
   var q_1_c = 'Dinner at 8pm';
 
@@ -291,7 +289,7 @@ $(document).ready(function () {
   function displayBlocks() {
     $('.to-show').removeClass('hide');
   }
-  
+
   // load animation
   function loadAnimation() {
     hideBloks();
@@ -301,42 +299,33 @@ $(document).ready(function () {
     }, 200)
   }
 
+  if (window.location.pathname.includes('/step_5-animation.html')) {
+
+    loadAnimation();
+
+    var answer_1 = sessionStorage.getItem('What is your perfect first date?');
+
+    setTimeout(function () {
+      if (answer_1 === q_1_a) {
+        document.location.replace("step_6-product_1.html", '_self');
+      }
+      if (answer_1 === q_1_b) {
+        document.location.replace("step_6-product_3.html", '_self');
+      }
+      if (answer_1 === q_1_c) {
+        document.location.replace("step_6-product_2.html", '_self');
+      }
+    }, 2200)
+  }
 
   function answerInputHandler(e) {
-    e.preventDefault();
 
     sessionStorage.setItem(question, this.value);
 
-    if (last_question.length > 0) {
-      var answer_1 = sessionStorage.getItem('What is your perfect first date?');
-      console.log(answer_1);
-
-      // if (window.location.pathname.includes('/step_5.html')) {
-      //   $(window).bind('beforeunload', function() {
-      //     loadAnimation();
-      //     return "";
-      //   });
-      // }
-
-      loadAnimation();
-
-      setTimeout(function () {
-        if (answer_1 === q_1_a) {
-          window.open("step_6-product_1.html", '_self');
-        }
-        if (answer_1 === q_1_b) {
-          window.open("step_6-product_3.html", '_self');
-        }
-        if (answer_1 === q_1_c) {
-          window.open("step_6-product_2.html", '_self');
-        }
-      }, 2200)
-    } else {
-      $(this).closest('form').submit();
-    }
+    $(this).closest('form').submit();
   }
 
-  if (answer_inputs.length > 0) {
+  if ($('input[data-question="question"]').length > 0 && answer_inputs.length > 0) {
     answer_inputs.click(answerInputHandler);
   }
 
