@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <main class="main-contact bg-3 container step-2">
+  <main class="main-contact container">
     <div class="background"></div>
 
     <div class="logo">
@@ -21,35 +21,62 @@
       <div class="grid-position--top">
 
         <form action="step_3.html" method="get" class="question">
-          <input type="hidden" name="question" data-question="question"
-            value="Select the one that you are instantly and instinctively drawn towards" />
+          <input type="hidden" name="question" value="What is your age group?" />
 
           <h3>
-            {{EN: Select the one that you are instantly and instinctively drawn towards.||JP: 好きな人と連絡を取りたい頻度は？}}
+            {{EN: What is your age group?||JP: あなたの年齢を教えてください}}
           </h3>
 
-          <div class="btns">
+          <div class="btns btns__md column">
 
-            <label class="btn btn__card btn__card--no-text">
-              <input type="submit" name="answer" value="grass" hidden />
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="~ 18" hidden />
 
-              <img src="./img/Q1_1.jpg" alt="">
+              {{EN: ~ 18}}
             </label>
 
-            <label class="btn btn__card btn__card--no-text">
-              <input type="submit" name="answer" value="flowers" hidden />
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="18 ~ 24" hidden />
 
-              <img src="./img/Q1_2.jpg" alt="">
+              {{EN: 18 ~ 24}}
             </label>
 
-            <label class="btn btn__card btn__card--no-text">
-              <input type="submit" name="answer" value="sunset" hidden />
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="25 ~ 29" hidden />
 
-              <img src="./img/Q1_3.jpg" alt="">
+              {{EN: 25 ~ 29}}
+            </label>
+
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="30 ~ 39" hidden />
+
+              {{EN: 30 ~ 39}}
+            </label>
+
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="40 ~ 49" hidden />
+
+              {{EN: 40 ~ 49}}
+            </label>
+
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="50 ~ 59" hidden />
+
+              {{EN: 50 ~ 59}}
+            </label>
+
+            <label class="btn btn__md">
+              <input type="submit" name="answer" value="60 ~" hidden />
+
+              {{EN: 60 ~}}
             </label>
           </div>
         </form>
       </div>
+
+      <div class="grid-position--bottom">
+      </div>
+
     </div>
 
   </main>
