@@ -2,7 +2,7 @@
     #qr_place {
         width: 100%;
         max-width: 384px;
-        margin: 173px auto 0;
+        margin: 65px auto 0;
         height: 381px;
         border: 7px solid #fff;
         display: flex;
@@ -18,15 +18,41 @@
 
     h2 {
         margin-top: 29px;
+        font-size: 35px;
+        line-height: 130%;
     }
 
     h3 {
         margin-top: 23px;
+        font-size: 36px;
+        line-height: 130%;
+    }
+
+    .logo {
+        & + h3 {
+            margin-top: 70px;
+        }
     }
 }
 
 @media screen and (max-width: 560px) {
     .main-contact.index {
         margin-top: 30px;
+
+        h2 {
+            font-size: 27px;
+            line-height: 130%;
+        }
+
+        h3 {
+            font-size: 24px;
+            line-height: 130%;
+        }
+
+        .logo {
+            & + h3 {
+                margin-top: 20px;
+            }
+        }
     }
 }

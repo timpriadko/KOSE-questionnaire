@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <main class="main-contact step-3 container">
+  <main class="main-contact bg-3 container">
     <div class="background"></div>
 
     <div class="logo">
@@ -21,62 +21,35 @@
       <div class="grid-position--top">
 
         <form action="step_4.html" method="get" class="question">
-          <input type="hidden" name="question" value="What is your age group?" />
+          <input type="hidden" name="question" data-question="question"
+            value="Select the one that you are instantly and instinctively drawn towards" />
 
           <h3>
-            {{EN: What is your age group?||JP: あなたの年齢を教えてください}}
+            {{EN: Select the one that you are instantly and instinctively drawn towards.||JP: この中で一番インスピレーションを受ける風景は？}}
           </h3>
 
-          <div class="btns btns__md column">
+          <div class="btns">
 
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="~ 18" hidden />
+            <label class="btn btn__card btn__card--no-text">
+              <input type="submit" name="answer" value="grass" hidden />
 
-              {{EN: ~ 18}}
+              <img src="./img/Q1_1.jpg" alt="">
             </label>
 
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="18 ~ 24" hidden />
+            <label class="btn btn__card btn__card--no-text">
+              <input type="submit" name="answer" value="flowers" hidden />
 
-              {{EN: 18 ~ 24}}
+              <img src="./img/Q1_2.jpg" alt="">
             </label>
 
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="25 ~ 29" hidden />
+            <label class="btn btn__card btn__card--no-text">
+              <input type="submit" name="answer" value="sunset" hidden />
 
-              {{EN: 25 ~ 29}}
-            </label>
-
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="30 ~ 39" hidden />
-
-              {{EN: 30 ~ 39}}
-            </label>
-
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="40 ~ 49" hidden />
-
-              {{EN: 40 ~ 49}}
-            </label>
-
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="50 ~ 59" hidden />
-
-              {{EN: 50 ~ 59}}
-            </label>
-
-            <label class="btn btn__md">
-              <input type="submit" name="answer" value="60 ~" hidden />
-
-              {{EN: 60 ~}}
+              <img src="./img/Q1_3.jpg" alt="">
             </label>
           </div>
         </form>
       </div>
-
-      <div class="grid-position--bottom">
-      </div>
-
     </div>
 
   </main>

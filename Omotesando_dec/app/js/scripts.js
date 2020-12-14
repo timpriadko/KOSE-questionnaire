@@ -148,7 +148,7 @@ $(document).ready(function () {
 
   var form_validation = function () {
     // promo validation
-    const promocode = 'HOLIDAY';
+    const promocode = 'NEWBIE';
 
     // email validaton
     if (isEmail(email.val()) &&
